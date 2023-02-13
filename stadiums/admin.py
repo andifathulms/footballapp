@@ -1,3 +1,5 @@
 from django.contrib import admin
 
-# Register your models here.
+from .models import Stadium
+
+admin.site.register(Stadium)
