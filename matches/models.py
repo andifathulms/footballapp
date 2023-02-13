@@ -45,7 +45,7 @@ class MatchData(models.Model):
     second_half_added_time = models.PositiveSmallIntegerField()
     et_first_half_added_time = models.PositiveSmallIntegerField(blank=True, null=True)
     et_second_half_added_time = models.PositiveSmallIntegerField(blank=True, null=True)
-    cards = models.ManyToManyField(Player, related_name='match_datas', through='MatchCards')
+    cards = models.ManyToManyField(Player, related_name='match_datas', through='MatchCards', through_fields=('match_data', 'player'))
     lineups = models.ForeignKey('LineUp', related_name='match_datas', on_delete=models.CASCADE)
 
 
@@ -60,19 +60,15 @@ class Formation(models.Model):
 
 class LineUp(models.Model):
     coach = models.ForeignKey(Coach, related_name='match_lineups', on_delete=models.CASCADE)
+    team = models.ForeignKey(Team, related_name='match_lineups', on_delete=models.CASCADE, blank=True, null=True)
     formation = models.ForeignKey(Formation, related_name='match_lineups', on_delete=models.CASCADE)
-    starting = models.ManyToManyField(Player, related_name='match_starting_lineups', through='PlayerRoleProxy')
-    reserved = models.ManyToManyField(Player, related_name='match_reserved_lineups', through='PlayerRole')
-
-    TYPE = Choices(
-        (1, 'home', 'Home'),
-        (2, 'away', 'Away')
-    )
-    type = models.PositiveSmallIntegerField(choices=TYPE)
+    starting = models.ManyToManyField(Player, related_name='match_starting_lineups', through='PlayerRoleProxy', through_fields=('lineup', 'player'))
+    reserved = models.ManyToManyField(Player, related_name='match_reserved_lineups', through='PlayerRole', through_fields=('lineup', 'player'))
 
 
 class Substitution(models.Model):
     match = models.ForeignKey('Match', related_name='substitutions', on_delete=models.CASCADE)
+    team = models.ForeignKey(Team, related_name='substitutions', on_delete=models.CASCADE, blank=True, null=True)
     player_out = models.ForeignKey(Player, related_name='out_substitutions', on_delete=models.CASCADE)
     player_in = models.ForeignKey(Player, related_name='in_substitutions', on_delete=models.CASCADE)
 
@@ -89,6 +85,7 @@ class Substitution(models.Model):
 
 class Goals(models.Model):
     match = models.ForeignKey('Match', related_name='goals', on_delete=models.CASCADE)
+    team = models.ForeignKey(Team, related_name='goals', on_delete=models.CASCADE, blank=True, null=True)
     scorer = models.ForeignKey(Player, related_name='goal_scorers', on_delete=models.CASCADE)
     assist = models.ForeignKey(Player, related_name='goal_assists', on_delete=models.CASCADE, blank=True, null=True)
     second_assist = models.ForeignKey(Player, related_name='goal_second_assists', on_delete=models.CASCADE, blank=True, null=True)
@@ -161,6 +158,7 @@ class Goals(models.Model):
 
 class MissedPenalty(models.Model):
     match = models.ForeignKey('Match', related_name='missed_penalties', on_delete=models.CASCADE)
+    team = models.ForeignKey(Team, related_name='missed_penalties', on_delete=models.CASCADE, blank=True, null=True)
     penalty_taker = models.ForeignKey(Player, related_name='missed_penalties', on_delete=models.CASCADE)
 
     TYPE = Choices(
@@ -185,6 +183,7 @@ class MissedPenalty(models.Model):
 class MatchCards(models.Model):
     player = models.ForeignKey(Player, on_delete=models.CASCADE)
     match_data = models.ForeignKey('MatchData', on_delete=models.CASCADE)
+    team = models.ForeignKey(Team, on_delete=models.CASCADE, blank=True, null=True)
 
     HALF = Choices(
         (1, 'first_half', 'First Half'),
