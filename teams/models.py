@@ -14,6 +14,9 @@ class Team(models.Model):
     coaches = models.ManyToManyField(Coach, through='CoachList', related_name='teams')
     players = models.ManyToManyField(Player, through='PlayerList', related_name='teams')
 
+    def __str__(self) -> str:
+        return self.name
+
 
 class CoachList(models.Model):
     coach = models.ForeignKey(Coach, on_delete=models.CASCADE)

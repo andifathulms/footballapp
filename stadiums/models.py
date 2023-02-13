@@ -8,3 +8,6 @@ class Stadium(models.Model):
     city = models.ForeignKey(City, related_name='stadiums', on_delete=models.CASCADE)
     capacity = models.IntegerField(default=0)
     year_of_opened = models.IntegerField(blank=True, null=True)
+
+    def __str__(self) -> str:
+        return self.name
