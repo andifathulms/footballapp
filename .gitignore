@@ -2,6 +2,7 @@ footballapp/static/*
 bower
 media/*
 settings_local.py
+.vscode/*
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
