@@ -9,7 +9,7 @@ from model_utils import Choices
 
 class Team(models.Model):
     name = models.CharField(max_length=255)
-    stadium = models.OneToOneField(Stadium, on_delete=models.CASCADE)
+    stadium = models.ForeignKey(Stadium, on_delete=models.CASCADE)
     city = models.ForeignKey(City, related_name='teams', on_delete=models.CASCADE)
     coaches = models.ManyToManyField(Coach, through='CoachList', related_name='teams')
     players = models.ManyToManyField(Player, through='PlayerList', related_name='teams')
