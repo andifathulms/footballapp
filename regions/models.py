@@ -14,7 +14,8 @@ class City(models.Model):
     type = models.PositiveSmallIntegerField(choices=TYPE, blank=True, null=True)
 
     def __str__(self) -> str:
-        return self.name
+        city_name = self.get_type_display() + " " + self.name if self.country.name == "Indonesia" else self.name
+        return city_name
 
 
 class Province(models.Model):

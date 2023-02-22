@@ -39,3 +39,13 @@ class PlayerList(models.Model):
     end = models.DateField(blank=True, null=True)
     shirt_number = models.PositiveSmallIntegerField(blank=True, null=True )
     is_active = models.BooleanField(default=True)
+
+    STATUS = Choices(
+        (1, 'permanent', 'Permanent'),
+        (2, 'on_loan', 'On Loan'),
+        (3, 'youth', 'Youth')
+    )
+    status = models.PositiveSmallIntegerField(choices=STATUS, default=STATUS.permanent)
+
+    def __str__(self) -> str:
+        return f"{self.player.name} ({self.team.name})"

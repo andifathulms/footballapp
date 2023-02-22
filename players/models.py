@@ -3,6 +3,8 @@ from regions.models import Country, City
 
 from model_utils import Choices
 
+from typing import Any
+
 
 class Player(models.Model):
     name = models.CharField(max_length=255)
@@ -21,15 +23,13 @@ class Player(models.Model):
     )
     preferred_foot = models.PositiveSmallIntegerField(choices=PREFERRED_FOOT, blank=True, null=True)
 
-    STATUS = Choices(
-        (1, 'permanent', 'Permanent'),
-        (2, 'on_loan', 'On Loan')
-    )
-    status = models.PositiveSmallIntegerField(choices=STATUS, default=STATUS.permanent)
-
     def __str__(self) -> str:
         return self.name
 
+    @property
+    def get_current_teams(self) -> Any:  # getting past circular import
+        # print(self.teams.first().start)
+        return self.teams.first()
 
 class Position(models.Model):
     name = models.CharField(max_length=20, unique=True)
@@ -42,6 +42,7 @@ class Position(models.Model):
         (4, 'GK', 'Goalkeeper')
     )
     type = models.PositiveSmallIntegerField(choices=TYPE)
+    display_order = models.PositiveSmallIntegerField(default=0)
 
     def __str__(self) -> str:
         return self.abbreviation

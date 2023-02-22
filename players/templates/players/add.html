@@ -1,0 +1,174 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section class="section section bg-soft pb-5 overflow-hidden z-2">
+    {% for message in messages %}
+    <div class="alert alert-success alert-dismissible shadow-inset fade show" role="alert">
+        <span class="alert-inner--icon"><span class="far fa-thumbs-up"></span></span>
+        <span class="alert-inner--text"><strong>Well done!</strong> {{ message }}.</span>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    {% endfor %}
+    <div class="container z-2">
+        <div class="row">
+            <div class="col">
+                <h2 class="h5">{{ title }}</h2>
+                {{ form.non_field_errors }}
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="section section-lg pt-4">
+    <div class="container">
+        <form method="POST">{% csrf_token %}
+            <div class="row mb-4 mb-lg-5">
+                <div class="col-lg-6 col-sm-6">
+                    <div class="form-group">
+                        <label for="{{ form.name.id_for_label }}">Name</label>
+                        {{ form.name }}
+                        <!-- <div class="valid-feedback"> # is-valid / is-invalid
+                        Looks good!
+                        </div>-->
+                        <div class="invalid-feedback">
+                            {{ form.name.errors }}
+                        </div>
+                    </div>
+                    <div class="form-group mb-4">
+                        <label for="{{ form.fullname.id_for_label }}">Fullname</label>
+                        {{ form.fullname }}
+                        <div class="invalid-feedback">
+                            {{ form.fullname.errors }}
+                        </div>               
+                    </div>
+                    <div class="form-group">
+                        <label for="{{ form.nationality.id_for_label }}">Nationality</label>
+                        {{ form.nationality }}
+                        <div class="invalid-feedback">
+                            {{ form.nationality.errors }}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="{{ form.date_of_birth.id_for_label }}">Date of Birth</label>
+                        <div class="input-group mb-4">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><span class="far fa-calendar-alt"></span></span>
+                            </div>
+                            {{ form.date_of_birth }}
+                            <div class="invalid-feedback">
+                                {{ form.date_of_birth.errors }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="{{ form.place_of_birth.id_for_label }}">Place of Birth</label>
+                        {{ form.place_of_birth }}
+                        <div class="invalid-feedback">
+                            {{ form.place_of_birth.errors }}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="{{ form.height.id_for_label }}">Height</label>
+                        {{ form.height }}
+                        <div class="invalid-feedback">
+                            {{ form.height.errors }}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="{{ form.primary_position.id_for_label }}">Primary Position</label>
+                        {{ form.primary_position }}
+                        <div class="invalid-feedback">
+                            {{ form.primary_position.errors }}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="{{ form.other_position.id_for_label }}">Other Position</label>
+                        {{ form.other_position }}
+                        <div class="invalid-feedback">
+                            {{ form.other_position.errors }}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="{{ form.preferred_foot.id_for_label }}">Preferred Foot</label>
+                        {{ form.preferred_foot }}
+                        <div class="invalid-feedback">
+                            {{ form.preferred_foot.errors }}
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-sm-6">
+                    <div class="form-group">
+                        <label for="{{ form.team.id_for_label }}">Team</label>
+                        {{ form.team }}
+                        <div class="invalid-feedback">
+                            {{ form.team.errors }}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="{{ form.start_date.id_for_label }}">Start Date</label>
+                        <div class="input-group mb-4">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><span class="far fa-calendar-alt"></span></span>
+                            </div>
+                            {{ form.start_date }}
+                            <div class="invalid-feedback">
+                                {{ form.start_date.errors }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="{{ form.end_date.id_for_label }}">End Date</label>
+                        <div class="input-group mb-4">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><span class="far fa-calendar-alt"></span></span>
+                            </div>
+                            {{ form.end_date }}
+                            <div class="invalid-feedback">
+                                {{ form.end_date.errors }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="{{ form.shirt_number.id_for_label }}">Shirt Number</label>
+                        {{ form.shirt_number }}
+                        <div class="invalid-feedback">
+                            {{ form.shirt_number.errors }}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="{{ form.status.id_for_label }}">Status</label>
+                        {{ form.status }}
+                        <div class="invalid-feedback">
+                            {{ form.status.errors }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-block btn-primary">Save</button>
+        </form>
+    </div>
+</div>
+{% endblock content %}
+
+{% block script %}
+<script>
+    $("#id_name").addClass("form-control");
+    $("#id_fullname").addClass("form-control");
+    $("#id_nationality").addClass("custom-select");
+    $("#id_date_of_birth").addClass("form-control datepicker");
+    $("#id_place_of_birth").addClass("custom-select");
+    $("#id_height").addClass("form-control");
+    $("#id_primary_position").addClass("custom-select");
+    $("#id_other_position").css("display","flex");
+    $("#id_other_position").css("justify-content","space-between");
+    $("#id_preferred_foot").addClass("custom-select");
+
+    $("#id_team").addClass("custom-select");
+    $("#id_start_date").addClass("form-control datepicker");
+    $("#id_end_date").addClass("form-control datepicker");
+    $("#id_shirt_number").addClass("form-control");
+    $("#id_status").addClass("custom-select");
+</script>
+{% endblock %}

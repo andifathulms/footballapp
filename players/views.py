@@ -1,13 +1,18 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpRequest
+from django.contrib import messages
+from django.urls import reverse
+
+from .forms import PlayerCreationForm
 
 def add(request: HttpRequest) -> HttpResponse:
 
-    form = PlayerCreationForm(data=request.POST or None, customer=customer)
+    form = PlayerCreationForm(data=request.POST or None)
     if form.is_valid():
-        booking = form.save(created_by=user)
-        messages.success(request, "Booking successfully created")
-        return redirect(reverse("customers:bookings:details", args=[booking.id]))
+        player = form.save()
+        messages.success(request, f"Player successfully created. {player} ({player.get_current_teams})")
+        # return redirect(reverse("customers:bookings:details", args=[booking.id]))
+        return redirect(reverse("players:add"))
 
     context_data = {
         "title": "Add Player",
