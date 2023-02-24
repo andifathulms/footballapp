@@ -1,25 +1,23 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<section class="section section bg-soft pb-5 overflow-hidden z-2">
-    {% for message in messages %}
-    <div class="alert alert-success alert-dismissible shadow-inset fade show" role="alert">
-        <span class="alert-inner--icon"><span class="far fa-thumbs-up"></span></span>
-        <span class="alert-inner--text"><strong>Well done!</strong> {{ message }}.</span>
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
-    </div>
-    {% endfor %}
-    <div class="container z-2">
-        <div class="row">
-            <div class="col">
-                <h2 class="h5">{{ title }}</h2>
-                {{ form.non_field_errors }}
-            </div>
+{% for message in messages %}
+<div class="alert alert-success alert-dismissible shadow-inset fade show" role="alert">
+    <span class="alert-inner--icon"><span class="far fa-thumbs-up"></span></span>
+    <span class="alert-inner--text"><strong>Well done!</strong> {{ message }}.</span>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+{% endfor %}
+<div class="container z-2">
+    <div class="row">
+        <div class="col">
+            <h2 class="h5">{{ title }}</h2>
+            {{ form.non_field_errors }}
         </div>
     </div>
-</section>
+</div>
 
 <div class="section section-lg pt-4">
     <div class="container">

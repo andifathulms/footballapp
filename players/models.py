@@ -3,6 +3,7 @@ from regions.models import Country, City
 
 from model_utils import Choices
 
+from datetime import date
 from typing import Any
 
 
@@ -19,7 +20,8 @@ class Player(models.Model):
     
     PREFERRED_FOOT = Choices(
         (1, 'L', 'Left'),
-        (2, 'R', 'Right')
+        (2, 'R', 'Right'),
+        (3, 'both', 'Both')
     )
     preferred_foot = models.PositiveSmallIntegerField(choices=PREFERRED_FOOT, blank=True, null=True)
 
@@ -30,6 +32,17 @@ class Player(models.Model):
     def get_current_teams(self) -> Any:  # getting past circular import
         # print(self.teams.first().start)
         return self.teams.first()
+
+    @property
+    def display_age(self) -> str:
+        if not self.date_of_birth:
+            return 'No Date of Birth'
+
+        today = date.today()
+        age = today.year - self.date_of_birth.year - ((today.month, today.day) < (self.date_of_birth.month, self.date_of_birth.day))
+        year = today.year - 1 if today.month < self.date_of_birth.month else today.year
+        dif = today - date(year, self.date_of_birth.month, self.date_of_birth.day)
+        return f'{age} years {dif.days} days'
 
 class Position(models.Model):
     name = models.CharField(max_length=20, unique=True)

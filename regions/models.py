@@ -16,6 +16,12 @@ class City(models.Model):
     def __str__(self) -> str:
         city_name = self.get_type_display() + " " + self.name if self.country.name == "Indonesia" else self.name
         return city_name
+    
+    @property
+    def get_indonesian_province(self) -> str:
+        if self.country.name == "Indonesia":
+            return self.province.name
+        return
 
 
 class Province(models.Model):

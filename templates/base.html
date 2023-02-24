@@ -21,8 +21,10 @@
 <body>
     {% include 'snippets/header.html' %}
     <main>
-        {% block content %}
-        {% endblock content %}        
+        <section class="section section bg-soft pb-5 overflow-hidden z-2">
+            {% block content %}
+            {% endblock content %} 
+        </section>       
     </main>
     {% include 'snippets/footer.html' %}
 

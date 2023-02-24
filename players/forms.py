@@ -16,7 +16,7 @@ class PlayerCreationForm(forms.Form):
     height = forms.IntegerField(required=False)
     primary_position = forms.ModelChoiceField(queryset=None)
     other_position = forms.ModelMultipleChoiceField(queryset=None, widget=forms.CheckboxSelectMultiple(), required=False)
-    preferred_foot = forms.TypedChoiceField(choices=Player.PREFERRED_FOOT, coerce=int, initial=Player.PREFERRED_FOOT.R)
+    preferred_foot = forms.TypedChoiceField(choices=Player.PREFERRED_FOOT, coerce=int, initial=Player.PREFERRED_FOOT.R, required=False)
 
     team = forms.ModelChoiceField(queryset=None)
     start_date = forms.DateField()
@@ -28,7 +28,9 @@ class PlayerCreationForm(forms.Form):
         super().__init__(*args, **kwargs)
 
         countries = Country.objects.order_by('name')
+        initial_country = Country.objects.get(name="Indonesia")
         self.fields['nationality'].queryset = countries
+        self.fields['nationality'].initial = initial_country
 
         cities = City.objects.order_by('type', 'name')
         self.fields['place_of_birth'].queryset = cities
@@ -38,7 +40,9 @@ class PlayerCreationForm(forms.Form):
         self.fields['other_position'].queryset = positions
 
         teams = Team.objects.order_by('name')
+        initial_team = Team.objects.get(name="Barito Putera")
         self.fields['team'].queryset = teams
+        self.fields['team'].initial = initial_team
     
     def save(self) -> Player:
         name = self.cleaned_data["name"]

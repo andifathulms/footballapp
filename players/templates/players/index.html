@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="section bg-primary pt-0 section-lg">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-12">
+                <div class="mb-4">
+                    <span class="h5">Player List</span>
+                </div>
+                <div class="table-responsive-sm shadow-soft rounded">
+                    <table class="table table-striped">
+                        <tr>
+                            <th class="border-0" scope="col">Player</th>
+                            <th class="border-0" scope="col">Team</th>
+                            <th class="border-0" scope="col">Nationality</th>
+                            <th class="border-0" scope="col">Age</th>
+                            <th class="border-0" scope="col">Place Of Birth (Regency/City)</th>
+                            <th class="border-0" scope="col">Place Of Birth (Province)</th>
+                            <th class="border-0" scope="col">Height (cm)</th>
+                            <th class="border-0" scope="col">Preferred Foot</th>
+                        </tr>
+                        {% for player in players %}
+                        <tr>
+                            <td>{{ player.name }}</td>
+                            <td>{{ player.get_current_teams }}</td>
+                            <td>{{ player.nationality }}</td>
+                            <td>{{ player.display_age }}</td>
+                            <td>{{ player.place_of_birth|default:"-" }}</td>
+                            <td>{{ player.place_of_birth.get_indonesian_province|default:"-" }}</td>
+                            <td>{{ player.height|default:"-" }}</td>
+                            <td>{{ player.get_preferred_foot_display }}</td>
+                        </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+            </div>
+        </div>
+        <nav aria-label="Pagination">
+            <ul class="pagination" style="justify-content: center;">
+                {% for page_number in players.adjusted_elided_pages %}
+                    {% if page_number == players.paginator.ELLIPSIS %}
+                        {{ page_number }}
+                    {% else %}
+                        <li  class="page-item{% if page_number == players.number %} active {% endif %}">
+                            <a href="{% url 'players:index' %}?page={{ page_number }}" class="page-link">
+                                {{ page_number }}
+                            </a>
+                        </li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+        </nav>
+    </div>
+</div>
+{% endblock content %}
+
+{% block script %}
+<script>
+</script>
+{% endblock %}
