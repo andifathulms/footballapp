@@ -1,5 +1,7 @@
 from django import forms
 
+from datetime import date
+
 from .models import Position, Player
 from teams.models import PlayerList, Team
 from regions.models import City, Country
@@ -24,6 +26,9 @@ class PlayerCreationForm(forms.Form):
     shirt_number = forms.IntegerField()
     status = forms.TypedChoiceField(choices=PlayerList.STATUS, coerce=int, initial=PlayerList.STATUS.permanent)
 
+    value = forms.IntegerField(required=False)
+    last_updated_value = forms.DateField(required=False)
+
     def __init__(self, *args: List, **kwargs: Any) -> None:
         super().__init__(*args, **kwargs)
 
@@ -40,9 +45,11 @@ class PlayerCreationForm(forms.Form):
         self.fields['other_position'].queryset = positions
 
         teams = Team.objects.order_by('name')
-        initial_team = Team.objects.get(id=7)
+        initial_team = Team.objects.get(id=14)
         self.fields['team'].queryset = teams
         self.fields['team'].initial = initial_team
+
+        self.fields['last_updated_value'].initial = date(2022, 7, 22).strftime('%m/%d/%Y')
     
     def save(self) -> Player:
         name = self.cleaned_data["name"]
@@ -61,6 +68,9 @@ class PlayerCreationForm(forms.Form):
         shirt_number = self.cleaned_data["shirt_number"]
         status = self.cleaned_data["status"]
 
+        value = self.cleaned_data["value"]
+        last_updated_value = self.cleaned_data["last_updated_value"]
+
         player = Player.objects.create(
             name=name, fullname=fullname, nationality=nationality, date_of_birth=date_of_birth,
             place_of_birth=place_of_birth, height=height, primary_position=primary_position,
@@ -73,5 +83,10 @@ class PlayerCreationForm(forms.Form):
             team=team, player=player, start=start_date, end=end_date,
             shirt_number=shirt_number, status=status
         )
+
+        if value:
+            player.market_values.create(
+                value=value, last_update_value=last_updated_value
+            )
 
         return player

@@ -142,6 +142,25 @@
                             {{ form.status.errors }}
                         </div>
                     </div>
+                    <div class="form-group">
+                        <label for="{{ form.value.id_for_label }}">Market Value</label>
+                        {{ form.value }}
+                        <div class="invalid-feedback">
+                            {{ form.value.errors }}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="{{ form.last_updated_value.id_for_label }}">Last Updated Value</label>
+                        <div class="input-group mb-4">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><span class="far fa-calendar-alt"></span></span>
+                            </div>
+                            {{ form.last_updated_value }}
+                            <div class="invalid-feedback">
+                                {{ form.last_updated_value.errors }}
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             <button type="submit" class="btn btn-block btn-primary">Save</button>
@@ -168,5 +187,8 @@
     $("#id_end_date").addClass("form-control datepicker");
     $("#id_shirt_number").addClass("form-control");
     $("#id_status").addClass("custom-select");
+
+    $("#id_value").addClass("form-control");
+    $("#id_last_updated_value").addClass("form-control datepicker");
 </script>
 {% endblock %}
