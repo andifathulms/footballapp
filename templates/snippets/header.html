@@ -31,15 +31,11 @@
                     </li>
                     <li class="nav-item dropdown">
                         <a href="#" class="nav-link" data-toggle="dropdown" >
-                            <span class="nav-link-inner-text">Pages</span>
+                            <span class="nav-link-inner-text">Region</span>
                             <span class="fas fa-angle-down nav-link-arrow ml-2"></span>
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="./html/pages/about.html">About</a></li>
-                            <li><a class="dropdown-item" href="./html/pages/pricing.html">Pricing</a></li>
-                            <li><a class="dropdown-item" href="./html/pages/contact.html">Contact</a></li>
-                            <li><a class="dropdown-item" href="./html/pages/sign-in.html">Sign in</a></li>
-                            <li><a class="dropdown-item" href="./html/pages/sign-up.html">Sign up</a></li>
+                            <li><a class="dropdown-item" href="{% url 'regions:player_by_region' %}">Player</a></li>
                         </ul>
                     </li>
                     <li class="nav-item dropdown mega-dropdown">

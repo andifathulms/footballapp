@@ -40,7 +40,7 @@ class PlayerCreationForm(forms.Form):
         self.fields['other_position'].queryset = positions
 
         teams = Team.objects.order_by('name')
-        initial_team = Team.objects.get(name="Barito Putera")
+        initial_team = Team.objects.get(id=7)
         self.fields['team'].queryset = teams
         self.fields['team'].initial = initial_team
     

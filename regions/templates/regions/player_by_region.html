@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="section bg-primary pt-0 section-lg">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-12">
+                <div class="mb-4">
+                    <span class="h5">Province</span>
+                </div>
+                <div class="table-responsive-sm shadow-soft rounded">
+                    <table class="table table-striped">
+                        <tr>
+                            <th class="border-0" scope="col">Province</th>
+                            <th class="border-0" scope="col">Count of Player</th>
+                            <th class="border-0" scope="col">Count of Regency</th>
+                            <th class="border-0" scope="col">Distinct Team</th>
+                            <th class="border-0" scope="col">Count of GK</th>
+                            <th class="border-0" scope="col">Count of DF</th>
+                            <th class="border-0" scope="col">Count of MF</th>
+                            <th class="border-0" scope="col">Count of FW</th>
+                        </tr>
+                        {% for province in provinces %}
+                        <tr>
+                            <td>{{ province.name }}</td>
+                            <td>{{ province.count }}</td>
+                            <td>{{ province.count_regency }}</td>
+                            <td>{{ province.count_team }}</td>
+                            <td>{{ province.count_of_gk }}</td>
+                            <td>{{ province.count_of_df }}</td>
+                            <td>{{ province.count_of_mf }}</td>
+                            <td>{{ province.count_of_fw }}</td>
+                        </tr>
+                        {% endfor %}
+                        {% for foreigner in foreigners %}
+                        {% if foreigner.name %}
+                        <tr>
+                            <td>{{ foreigner.name }}</td>
+                            <td>{{ foreigner.count }}</td>
+                            <td>{{ foreigner.count_regency }}</td>
+                            <td>{{ foreigner.count_team }}</td>
+                            <td>{{ foreigner.count_of_gk }}</td>
+                            <td>{{ foreigner.count_of_df }}</td>
+                            <td>{{ foreigner.count_of_mf }}</td>
+                            <td>{{ foreigner.count_of_fw }}</td>
+                        </tr>
+                        {% endif %}
+                        {% endfor %}
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}
+
+{% block script %}
+<script>
+</script>
+{% endblock %}
