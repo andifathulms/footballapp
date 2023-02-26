@@ -59,3 +59,8 @@ class Position(models.Model):
 
     def __str__(self) -> str:
         return self.abbreviation
+
+class MarketValue(models.Model):
+    player = models.ForeignKey('Player', related_name='market_values', on_delete=models.CASCADE)
+    value = models.FloatField()
+    last_update_value = models.DateField()
