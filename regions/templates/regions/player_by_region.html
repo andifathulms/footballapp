@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load age %}
 
 {% block content %}
 <div class="section bg-primary pt-0 section-lg">
@@ -9,7 +10,7 @@
                     <span class="h5">Province</span>
                 </div>
                 <div class="table-responsive-sm shadow-soft rounded">
-                    <table class="table table-striped">
+                    <table class="table table-striped" style="display: block; overflow-x: auto;">
                         <tr>
                             <th class="border-0" scope="col">Province</th>
                             <th class="border-0" scope="col">Count of Player</th>
@@ -19,6 +20,11 @@
                             <th class="border-0" scope="col">Count of DF</th>
                             <th class="border-0" scope="col">Count of MF</th>
                             <th class="border-0" scope="col">Count of FW</th>
+                            <th class="border-0" scope="col">Average Height</th>
+                            <th class="border-0" scope="col">Average Age</th>
+                            <th class="border-0" scope="col">Count of Left Footed</th>
+                            <th class="border-0" scope="col">Count of Right Footed</th>
+                            <th class="border-0" scope="col">Count of Both Footed</th>
                         </tr>
                         {% for province in provinces %}
                         <tr>
@@ -30,6 +36,11 @@
                             <td>{{ province.count_of_df }}</td>
                             <td>{{ province.count_of_mf }}</td>
                             <td>{{ province.count_of_fw }}</td>
+                            <td>{{ province.average_height|floatformat:2 }} cm</td>
+                            <td>{{ province.age|years_age|floatformat:2 }}</td>
+                            <td>{{ province.count_of_left_footed }}</td>
+                            <td>{{ province.count_of_right_footed }}</td>
+                            <td>{{ province.count_of_both_footed }}</td>
                         </tr>
                         {% endfor %}
                         {% for foreigner in foreigners %}
@@ -43,6 +54,15 @@
                             <td>{{ foreigner.count_of_df }}</td>
                             <td>{{ foreigner.count_of_mf }}</td>
                             <td>{{ foreigner.count_of_fw }}</td>
+                            <td>{{ foreigner.average_height|floatformat:2 }} cm</td>
+                            {% if foreigner.age %}
+                            <td>{{ foreigner.age|years_age|floatformat:2 }}</td>
+                            {% else %}
+                            <td> - </td>
+                            {% endif %}
+                            <td>{{ foreigner.count_of_left_footed }}</td>
+                            <td>{{ foreigner.count_of_right_footed }}</td>
+                            <td>{{ foreigner.count_of_both_footed }}</td>
                         </tr>
                         {% endif %}
                         {% endfor %}

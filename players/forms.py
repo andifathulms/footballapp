@@ -37,7 +37,7 @@ class PlayerCreationForm(forms.Form):
         self.fields['nationality'].queryset = countries
         self.fields['nationality'].initial = initial_country
 
-        cities = City.objects.order_by('type', 'name')
+        cities = City.objects.order_by('country__id', 'province__name', 'type', 'name')
         self.fields['place_of_birth'].queryset = cities
 
         positions = Position.objects.order_by('-display_order')
@@ -45,7 +45,7 @@ class PlayerCreationForm(forms.Form):
         self.fields['other_position'].queryset = positions
 
         teams = Team.objects.order_by('name')
-        initial_team = Team.objects.get(id=14)
+        initial_team = Team.objects.get(id=10)
         self.fields['team'].queryset = teams
         self.fields['team'].initial = initial_team
 
