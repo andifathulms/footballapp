@@ -28,7 +28,6 @@ def add(request: HttpRequest) -> HttpResponse:
     if form.is_valid():
         player = form.save()
         messages.success(request, f"Player successfully created. {player} ({player.get_current_teams})")
-        # return redirect(reverse("customers:bookings:details", args=[booking.id]))
         return redirect(reverse("players:add"))
 
     context_data = {

@@ -1,24 +1,50 @@
-{% extends 'base.html'  %}
+{% extends 'base.html' %}
 
 {% block content %}
-<section class="section section bg-soft pb-5 overflow-hidden z-2">
-    <div class="container z-2">
-        <div class="row justify-content-center text-center pt-6">
-            <div class="col-lg-8 col-xl-8">
-                <h1 class="display-2 mb-3">Football App</h1>
-                <p class="lead px-md-6 mb-5">Neumorphism inspired <strong>User Interface Kit</strong> that will help you prototype and design beautiful, creative and modern websites.</p>
-                <div class="d-flex flex-column flex-wrap flex-md-row justify-content-md-center mb-5">
-                    <a href="https://themesberg.com/product/ui-kits/neumorphism-ui" target="_blank" class="btn btn-primary mb-3 mb-lg-0 mr-3"><i class="fas fa-cloud-download-alt mr-2"></i> Download</a>
-                    <div class="mt-2">
-                        <a class="github-button" href="https://github.com/themesberg/neumorphism-ui" data-color-scheme="no-preference: dark; light: light; dark: light;" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star themesberg/neumorphism-ui on GitHub">Star</a>
-                    </div>
+<div class="section bg-primary pt-0 section-lg">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-12">
+                <div class="mb-4">
+                    <span class="h5">Tables of {{ competition }}</span>
                 </div>
-                <a href="https://themesberg.com" target="_blank" class="d-flex align-items-center justify-content-center flex-column">
-                    <img src="./assets/img/themesberg.svg" height="25" class="mb-3" alt="Themesberg Logo">
-                    <span class="text-muted font-small">A Themesberg production</span>
-                </a>
+                <div class="table-responsive-sm shadow-soft rounded">
+                    <table class="table table-striped">
+                        <tr>
+                            <th class="border-0" scope="col">Pos</th>
+                            <th class="border-0" scope="col">Team</th>
+                            <th class="border-0" scope="col">Played</th>
+                            <th class="border-0" scope="col">Win</th>
+                            <th class="border-0" scope="col">Draw</th>
+                            <th class="border-0" scope="col">Lose</th>
+                            <th class="border-0" scope="col">GF</th>
+                            <th class="border-0" scope="col">GA</th>
+                            <th class="border-0" scope="col">GD</th>
+                            <th class="border-0" scope="col">Point</th>
+                        </tr>
+                        {% for row in tables %}
+                        <tr>
+                            <td>{{ forloop.counter }}</td>
+                            <td>{{ row.team }}</td>
+                            <td>{{ row.total_played }}</td>
+                            <td>{{ row.total_win }}</td>
+                            <td>{{ row.total_draw }}</td>
+                            <td>{{ row.total_lose }}</td>
+                            <td>{{ row.total_goal }}</td>
+                            <td>{{ row.total_conceded }}</td>
+                            <td>{{ row.total_difference }}</td>
+                            <td>{{ row.total_point }}</td>
+                        </tr>
+                        {% endfor %}
+                    </table>
+                </div>
             </div>
         </div>
     </div>
-</section>
+</div>
 {% endblock content %}
+
+{% block script %}
+<script>
+</script>
+{% endblock %}

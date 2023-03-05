@@ -38,6 +38,16 @@
                             <li><a class="dropdown-item" href="{% url 'regions:player_by_region' %}">Player</a></li>
                         </ul>
                     </li>
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link" data-toggle="dropdown" >
+                            <span class="nav-link-inner-text">Matches</span>
+                            <span class="fas fa-angle-down nav-link-arrow ml-2"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="{% url 'matches:index' %}">Index</a></li>
+                            <li><a class="dropdown-item" href="{% url 'matches:add' %}">Add</a></li>
+                        </ul>
+                    </li>
                     <li class="nav-item dropdown mega-dropdown">
                         <a href="#" class="nav-link" data-toggle="dropdown" >
                             <span class="nav-link-inner-text">Components</span>

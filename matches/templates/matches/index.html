@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="section bg-primary pt-0 section-lg">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-12">
+                <div class="mb-4">
+                    <span class="h5">Matches of {{ competition }}</span>
+                </div>
+                <div class="table-responsive-sm shadow-soft rounded">
+                    <table class="table table-striped">
+                        <tr>
+                            <th class="border-0" scope="col">Gameweek</th>
+                            <th class="border-0" scope="col">Date</th>
+                            <th class="border-0" scope="col" colspan=3>Match</th>
+                            <th class="border-0" scope="col">Status</th>
+                        </tr>
+                        {% for match in matches %}
+                        <tr>
+                            <td>{{ match.gameweek }}</td>
+                            <td></td>
+                            <td>{{ match.home_team }}</td>
+                            {% if match.status == match.STATUS.full_time %}
+                                <td>{{ match.home_score }} - {{ match.away_score }}</td>
+                            {% else %}
+                                <td></td>
+                            {% endif %}
+                            <td>{{ match.away_team }}</td>
+                            <td>{{ match.get_status_display }}</td>
+                        </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+            </div>
+        </div>
+        <nav aria-label="Pagination">
+            <ul class="pagination" style="justify-content: center;">
+                {% for page_number in matches.adjusted_elided_pages %}
+                    {% if page_number == matches.paginator.ELLIPSIS %}
+                        {{ page_number }}
+                    {% else %}
+                        <li  class="page-item{% if page_number == matches.number %} active {% endif %}">
+                            <a href="{% url 'matches:index' %}?page={{ page_number }}" class="page-link">
+                                {{ page_number }}
+                            </a>
+                        </li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+        </nav>
+    </div>
+</div>
+{% endblock content %}
+
+{% block script %}
+<script>
+</script>
+{% endblock %}

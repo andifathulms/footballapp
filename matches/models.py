@@ -12,6 +12,7 @@ from model_utils import Choices
 
 class Match(models.Model):
     competition = models.ForeignKey(Competition, related_name='matches', on_delete=models.CASCADE)
+    gameweek = models.PositiveSmallIntegerField(blank=True, null=True)
     home_team = models.ForeignKey(Team, related_name='home_matches', on_delete=models.CASCADE)
     away_team = models.ForeignKey(Team, related_name='away_matches', on_delete=models.CASCADE)
     home_score = models.PositiveSmallIntegerField(default=0)
@@ -24,6 +25,12 @@ class Match(models.Model):
         (9, 'postponed', 'Postponed')
     )
     status = models.PositiveSmallIntegerField(choices=STATUS, default=STATUS.not_started)
+
+    def __str__(self) -> str:
+        match_name = self.home_team.name + " vs " + self.away_team.name
+        if self.status == self.STATUS.full_time:
+            return match_name + f" ({self.home_score}-{self.away_score})"
+        return match_name
 
 
 class MatchOfficial(models.Model):
