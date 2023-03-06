@@ -27,9 +27,21 @@ class CoachList(models.Model):
 
     DEPARTURE_REASON = Choices(
         (1, 'sacked', 'Sacked'), 
-        (2, 'mutual_consent', 'Mutual Consent')
+        (2, 'mutual_consent', 'Mutual Consent'),
+        (3, 'resigned', 'Resigned'),
+        (4, 'end_of_caretaker_spell', 'End of Caretaker Spell'),
+        (4, 'end_of_contract', 'End of Contract')
     )
     departure_reason = models.PositiveSmallIntegerField(choices=DEPARTURE_REASON, blank=True, null=True)
+
+    STATUS = Choices(
+        (1, 'manager', 'Manager'),
+        (2, 'caretaker', 'Caretaker')
+    )
+    status = models.PositiveSmallIntegerField(choices=STATUS, default=STATUS.manager)
+
+    def __str__(self) -> str:
+        return f"{self.coach.name} ({self.team.name})"
 
 
 class PlayerList(models.Model):

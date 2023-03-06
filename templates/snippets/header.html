@@ -21,25 +21,6 @@
                 <ul class="navbar-nav navbar-nav-hover align-items-lg-center">
                     <li class="nav-item dropdown">
                         <a href="#" class="nav-link" data-toggle="dropdown" >
-                            <span class="nav-link-inner-text">Players</span>
-                            <span class="fas fa-angle-down nav-link-arrow ml-2"></span>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="{% url 'players:index' %}">Index</a></li>
-                            <li><a class="dropdown-item" href="{% url 'players:add' %}">Add</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a href="#" class="nav-link" data-toggle="dropdown" >
-                            <span class="nav-link-inner-text">Region</span>
-                            <span class="fas fa-angle-down nav-link-arrow ml-2"></span>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="{% url 'regions:player_by_region' %}">Player</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a href="#" class="nav-link" data-toggle="dropdown" >
                             <span class="nav-link-inner-text">Matches</span>
                             <span class="fas fa-angle-down nav-link-arrow ml-2"></span>
                         </a>
@@ -50,64 +31,26 @@
                     </li>
                     <li class="nav-item dropdown mega-dropdown">
                         <a href="#" class="nav-link" data-toggle="dropdown" >
-                            <span class="nav-link-inner-text">Components</span>
+                            <span class="nav-link-inner-text">Data</span>
                             <span class="fas fa-angle-down nav-link-arrow ml-2"></span>
                         </a>
                         <div class="dropdown-menu">
                             <div class="row">
-                                <div class="col-lg-6 inside-bg d-none d-lg-block">
-                                    <div class="justify-content-center bg-primary text-white">
-                                        <div class="px-6 pb-5 pt-3">
-                                            <img src="./assets/img/megamenu-image.jpg" alt="Pixel Components">
-                                        </div>
-                                        <div class="z-2 pb-4 text-center">
-                                            <a href="./html/components/all.html"  class="btn btn-primary mb-2 mb-sm-0 mr-3 text-secondary">
-                                                <span class="mr-1"><span class="fas fa-th-large"></span></span>
-                                                All components
-                                            </a>
-                                            <a href="https://themesberg.com/docs/neumorphism-ui/components/alerts" target="_blank" class="btn btn-primary mb-2 mb-sm-0">
-                                                <span class="mr-1"><span class="fas fa-book"></span></span>
-                                                Docs v1.0
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
                                 <div class="col pl-0">
                                     <ul class="list-style-none">
-                                        <li><a class="dropdown-item" href="./html/components/accordions.html">Accordions</a></li>
-                                        <li><a class="dropdown-item" href="./html/components/alerts.html">Alerts</a></li>
-                                        <li><a class="dropdown-item" href="./html/components/badges.html">Badges</a></li>
-                                        <li><a class="dropdown-item" href="./html/components/bootstrap-carousels.html">Bootstrap Carousels</a></li>
-                                        <li><a class="dropdown-item" href="./html/components/breadcrumbs.html">Breadcrumbs</a></li>
-                                        <li><a class="dropdown-item" href="./html/components/buttons.html">Buttons</a></li>
-                                        <li><a class="dropdown-item d-flex align-items-center justify-content-between" href="https://themesberg.com/docs/neumorphism-ui/plugins/jquery-counters/" target="_blank">Counters <span class="badge badge-dark ml-3">Pro</span></a></li>
-                                        <li><a class="dropdown-item" href="./html/components/cards.html">Cards</a></li>
-                                        <li><a class="dropdown-item d-flex align-items-center justify-content-between" href="https://themesberg.com/docs/neumorphism-ui/components/e-commerce/" target="_blank">E-commerce <span class="badge badge-dark ml-3">Pro</span></a></li>
+                                        <li><a class="dropdown-item" href="{% url 'players:index' %}">Player Index</a></li>
+                                        <li><a class="dropdown-item" href="{% url 'players:add' %}">Add Player</a></li>
                                     </ul>
                                 </div>
                                 <div class="col pl-0">
                                     <ul class="list-style-none">
-                                        <li><a class="dropdown-item" href="./html/components/forms.html">Forms</a></li>
-                                        <li><a class="dropdown-item d-flex align-items-center justify-content-between" href="https://themesberg.com/docs/neumorphism-ui/components/icon-boxes/" target="_blank">Icon Boxes <span class="badge badge-dark ml-3">Pro</span></a></li>
-                                        <li><a class="dropdown-item" href="./html/components/modals.html">Modals</a></li>
-                                        <li><a class="dropdown-item" href="./html/components/navs.html">Navs</a></li>
-                                        <li><a class="dropdown-item d-flex align-items-center justify-content-between" href="https://themesberg.com/docs/neumorphism-ui/plugins/owl-carousel/" target="_blank">Owl Carousels <span class="badge badge-dark ml-3">Pro</span></a></li>
-                                        <li><a class="dropdown-item" href="./html/components/pagination.html">Pagination</a></li>
-                                        <li><a class="dropdown-item" href="./html/components/popovers.html">Popovers</a></li>
-                                        <li><a class="dropdown-item" href="./html/components/progress-bars.html">Progress Bars</a></li>
-
+                                        <li><a class="dropdown-item" href="#">Manager Index</a></li>
+                                        <li><a class="dropdown-item" href="{% url 'coaches:add' %}">Add Manager</a></li>
                                     </ul>
                                 </div>
                                 <div class="col pl-0">
                                     <ul class="list-style-none">
-                                        <li><a class="dropdown-item d-flex align-items-center justify-content-between" href="https://themesberg.com/docs/neumorphism-ui/components/icon-boxes/#steps" target="_blank">Steps <span class="badge badge-dark ml-3">Pro</span></a></li>
-                                        <li><a class="dropdown-item" href="./html/components/tables.html">Tables</a></li>
-                                        <li><a class="dropdown-item" href="./html/components/tabs.html">Tabs</a> </li>
-                                        <li><a class="dropdown-item" href="./html/components/toasts.html">Toasts</a> </li>
-                                        <li><a class="dropdown-item d-flex align-items-center justify-content-between" href="https://themesberg.com/docs/neumorphism-ui/components/timelines/" target="_blank">Timelines <span class="badge badge-dark ml-3">Pro</span></a></li>
-                                        <li><a class="dropdown-item" href="./html/components/tooltips.html">Tooltips</a></li>
-                                        <li><a class="dropdown-item" href="./html/components/typography.html">Typography</a></li>
-                                        <li><a class="dropdown-item d-flex align-items-center justify-content-between" href="https://demo.themesberg.com/neumorphism-ui-pro/html/components/widgets.html" target="_blank">Widgets <span class="badge badge-dark ml-3">Pro</span></a></li>
+                                        <li><a class="dropdown-item" href="{% url 'regions:player_by_region' %}">All Player by Region</a></li>
                                     </ul>
                                 </div>
                             </div>
