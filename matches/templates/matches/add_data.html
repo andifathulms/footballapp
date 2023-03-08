@@ -1,0 +1,318 @@
+{% extends 'base.html' %}
+<!-- Tempus Dominus Styles -->
+{% block css %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.39.0/css/tempusdominus-bootstrap-4.min.css" integrity="sha512-3JRrEUwaCkFUBLK1N8HehwQgu8e23jTH4np5NHOmQOobuC4ROQxFwFgBLTnhcnQRMs84muMh0PnnwXlPq5MGjg==" crossorigin="anonymous" />
+{% endblock %}
+
+{% block content %}
+{% for message in messages %}
+<div class="alert alert-success alert-dismissible shadow-inset fade show" role="alert">
+    <span class="alert-inner--icon"><span class="far fa-thumbs-up"></span></span>
+    <span class="alert-inner--text"><strong>Well done!</strong> {{ message }}.</span>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+{% endfor %}
+<div class="container z-2">
+    <div class="row">
+        <div class="col">
+            <h2 class="h5">{{ title }}</h2>
+            {{ form.non_field_errors }}
+        </div>
+    </div>
+</div>
+
+<div class="section section-lg pt-4">
+    <div class="container">
+        <form method="POST">{% csrf_token %}
+            <div class="row mb-4 mb-lg-5">
+                <div class="col-lg-4 col-sm-4">
+                    <div class="form-group">
+                        <label for="{{ form.kick_off_time.id_for_label }}">Kick Off Time</label>
+                        <div class="input-group date" id="datetimepicker1" data-target-input="nearest">
+                            {{ form.kick_off_time }}
+                            <div class="input-group-append" data-target="#datetimepicker1" data-toggle="datetimepicker">
+                                <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-sm-4">
+                    <div class="form-group">
+                        <label for="{{ form.stadium.id_for_label }}">Stadium</label>
+                        {{ form.stadium }}
+                        <div class="invalid-feedback">
+                            {{ form.stadium.errors }}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="{{ form.attendance.id_for_label }}">Attendance</label>
+                        {{ form.attendance }}
+                        <div class="invalid-feedback">
+                            {{ form.attendance.errors }}
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-sm-4">
+                    <div class="form-group">
+                        <label for="{{ form.first_half_added_time.id_for_label }}">1st Added Time</label>
+                        {{ form.first_half_added_time }}
+                        <div class="invalid-feedback">
+                            {{ form.first_half_added_time.errors }}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="{{ form.second_half_added_time.id_for_label }}">2nd Added Time</label>
+                        {{ form.second_half_added_time }}
+                        <div class="invalid-feedback">
+                            {{ form.second_half_added_time.errors }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row mb-4 mb-lg-5">
+                <div class="col-lg-3 col-sm-3">
+                    <div class="form-group">
+                        <label for="{{ form.home_coach.id_for_label }}">Home Coach</label>
+                        {{ form.home_coach }}
+                        <div class="invalid-feedback">
+                            {{ form.home_coach.errors }}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="{{ form.home_formation.id_for_label }}">Home Formation</label>
+                        {{ form.home_formation }}
+                        <div class="invalid-feedback">
+                            {{ form.home_formation.errors }}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="{{ form.home_first_starting.id_for_label }}">Home First Starting</label>
+                        {{ form.home_first_starting }}
+                        <div class="invalid-feedback">
+                            {{ form.home_first_starting.errors }}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="{{ form.home_second_starting.id_for_label }}">Home Second Starting</label>
+                        {{ form.home_second_starting }}
+                        <div class="invalid-feedback">
+                            {{ form.home_second_starting.errors }}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="{{ form.home_third_starting.id_for_label }}">Home Third Starting</label>
+                        {{ form.home_third_starting }}
+                        <div class="invalid-feedback">
+                            {{ form.home_third_starting.errors }}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="{{ form.home_fourth_starting.id_for_label }}">Home Fourth Starting</label>
+                        {{ form.home_fourth_starting }}
+                        <div class="invalid-feedback">
+                            {{ form.home_fourth_starting.errors }}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="{{ form.home_fifth_starting.id_for_label }}">Home Fifth Starting</label>
+                        {{ form.home_fifth_starting }}
+                        <div class="invalid-feedback">
+                            {{ form.home_fifth_starting.errors }}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="{{ form.home_sixth_starting.id_for_label }}">Home Sixth Starting</label>
+                        {{ form.home_sixth_starting }}
+                        <div class="invalid-feedback">
+                            {{ form.home_sixth_starting.errors }}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="{{ form.home_seventh_starting.id_for_label }}">Home Seventh Starting</label>
+                        {{ form.home_seventh_starting }}
+                        <div class="invalid-feedback">
+                            {{ form.home_seventh_starting.errors }}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="{{ form.home_eighth_starting.id_for_label }}">Home Eighth Starting</label>
+                        {{ form.home_eighth_starting }}
+                        <div class="invalid-feedback">
+                            {{ form.home_eighth_starting.errors }}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="{{ form.home_ninth_starting.id_for_label }}">Home Ninth Starting</label>
+                        {{ form.home_ninth_starting }}
+                        <div class="invalid-feedback">
+                            {{ form.home_ninth_starting.errors }}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="{{ form.home_tenth_starting.id_for_label }}">Home Tenth Starting</label>
+                        {{ form.home_tenth_starting }}
+                        <div class="invalid-feedback">
+                            {{ form.home_tenth_starting.errors }}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="{{ form.home_eleventh_starting.id_for_label }}">Home Eleventh Starting</label>
+                        {{ form.home_eleventh_starting }}
+                        <div class="invalid-feedback">
+                            {{ form.home_eleventh_starting.errors }}
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-sm-3"></div>
+                <div class="col-lg-3 col-sm-3">
+                    <div class="form-group">
+                        <label for="{{ form.away_coach.id_for_label }}">Away Coach</label>
+                        {{ form.away_coach }}
+                        <div class="invalid-feedback">
+                            {{ form.away_coach.errors }}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="{{ form.away_formation.id_for_label }}">Away Formation</label>
+                        {{ form.away_formation }}
+                        <div class="invalid-feedback">
+                            {{ form.away_formation.errors }}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="{{ form.away_first_starting.id_for_label }}">Away First Starting</label>
+                        {{ form.away_first_starting }}
+                        <div class="invalid-feedback">
+                            {{ form.away_first_starting.errors }}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="{{ form.away_second_starting.id_for_label }}">Away Second Starting</label>
+                        {{ form.away_second_starting }}
+                        <div class="invalid-feedback">
+                            {{ form.away_second_starting.errors }}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="{{ form.away_third_starting.id_for_label }}">Away Third Starting</label>
+                        {{ form.away_third_starting }}
+                        <div class="invalid-feedback">
+                            {{ form.away_third_starting.errors }}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="{{ form.away_fourth_starting.id_for_label }}">Away Fourth Starting</label>
+                        {{ form.away_fourth_starting }}
+                        <div class="invalid-feedback">
+                            {{ form.away_fourth_starting.errors }}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="{{ form.away_fifth_starting.id_for_label }}">Away Fifth Starting</label>
+                        {{ form.away_fifth_starting }}
+                        <div class="invalid-feedback">
+                            {{ form.away_fifth_starting.errors }}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="{{ form.away_sixth_starting.id_for_label }}">Away Sixth Starting</label>
+                        {{ form.away_sixth_starting }}
+                        <div class="invalid-feedback">
+                            {{ form.away_sixth_starting.errors }}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="{{ form.away_seventh_starting.id_for_label }}">Away Seventh Starting</label>
+                        {{ form.away_seventh_starting }}
+                        <div class="invalid-feedback">
+                            {{ form.away_seventh_starting.errors }}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="{{ form.away_eighth_starting.id_for_label }}">Away Eighth Starting</label>
+                        {{ form.away_eighth_starting }}
+                        <div class="invalid-feedback">
+                            {{ form.away_eighth_starting.errors }}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="{{ form.away_ninth_starting.id_for_label }}">Away Ninth Starting</label>
+                        {{ form.away_ninth_starting }}
+                        <div class="invalid-feedback">
+                            {{ form.away_ninth_starting.errors }}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="{{ form.away_tenth_starting.id_for_label }}">Away Tenth Starting</label>
+                        {{ form.away_tenth_starting }}
+                        <div class="invalid-feedback">
+                            {{ form.away_tenth_starting.errors }}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="{{ form.away_eleventh_starting.id_for_label }}">Away Eleventh Starting</label>
+                        {{ form.away_eleventh_starting }}
+                        <div class="invalid-feedback">
+                            {{ form.away_eleventh_starting.errors }}
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-sm-3"></div>
+            </div>
+            <button type="submit" class="btn btn-block btn-primary">Save</button>
+        </form>
+    </div>
+</div>
+{% endblock content %}
+
+{% block script %}
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.0/moment.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.39.0/js/tempusdominus-bootstrap-4.min.js" integrity="sha512-k6/Bkb8Fxf/c1Tkyl39yJwcOZ1P4cRrJu77p83zJjN2Z55prbFHxPs9vN7q3l3+tSMGPDdoH51AEU8Vgo1cgAA==" crossorigin="anonymous"></script>
+
+<script>
+    $("#id_kick_off_time").addClass("form-control datetimepicker-input");
+    $("#id_stadium").addClass("custom-select");
+    $("#id_attendance").addClass("form-control");
+    $("#id_first_half_added_time").addClass("form-control");
+    $("#id_second_half_added_time").addClass("form-control");
+
+    $(function () {
+        $('#datetimepicker1').datetimepicker({
+            inline: true,
+            sideBySide: true,
+            format : 'DD/MM/YYYY HH:mm'
+        });
+    });
+
+    $("#id_home_coach").addClass("custom-select");
+    $("#id_home_formation").addClass("custom-select");
+    $("#id_home_first_starting").addClass("custom-select");
+    $("#id_home_second_starting").addClass("custom-select");
+    $("#id_home_third_starting").addClass("custom-select");
+    $("#id_home_fourth_starting").addClass("custom-select");
+    $("#id_home_fifth_starting").addClass("custom-select");
+    $("#id_home_sixth_starting").addClass("custom-select");
+    $("#id_home_seventh_starting").addClass("custom-select");
+    $("#id_home_eighth_starting").addClass("custom-select");
+    $("#id_home_ninth_starting").addClass("custom-select");
+    $("#id_home_tenth_starting").addClass("custom-select");
+    $("#id_home_eleventh_starting").addClass("custom-select");
+
+    $("#id_away_coach").addClass("custom-select");
+    $("#id_away_formation").addClass("custom-select");
+    $("#id_away_first_starting").addClass("custom-select");
+    $("#id_away_second_starting").addClass("custom-select");
+    $("#id_away_third_starting").addClass("custom-select");
+    $("#id_away_fourth_starting").addClass("custom-select");
+    $("#id_away_fifth_starting").addClass("custom-select");
+    $("#id_away_sixth_starting").addClass("custom-select");
+    $("#id_away_seventh_starting").addClass("custom-select");
+    $("#id_away_eighth_starting").addClass("custom-select");
+    $("#id_away_ninth_starting").addClass("custom-select");
+    $("#id_away_tenth_starting").addClass("custom-select");
+    $("#id_away_eleventh_starting").addClass("custom-select");
+</script>
+{% endblock %}

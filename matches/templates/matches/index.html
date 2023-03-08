@@ -29,6 +29,11 @@
                             {% endif %}
                             <td>{{ match.away_team }}</td>
                             <td>{{ match.get_status_display }}</td>
+                            {% if match.match_datas %}
+                                <td>View Data</td>
+                            {% else %}
+                                <td><a href="{% url 'matches:add_data' match.id %}">Add Data</a></td>
+                            {% endif %}
                         </tr>
                         {% endfor %}
                     </table>

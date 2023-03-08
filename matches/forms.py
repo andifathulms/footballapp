@@ -1,8 +1,11 @@
 from django import forms
 
-from .models import Match
+from .models import Match, MatchData, Formation
 from competitions.models import Competition
-from teams.models import Team
+from teams.models import Team, PlayerList, CoachList
+from stadiums.models import Stadium
+from coaches.models import Coach
+from players.models import Position
 
 from typing import List, Any, Dict
 
@@ -29,7 +32,7 @@ class MatchCreationForm(forms.ModelForm):
         self.fields['home_team'].queryset = teams
         self.fields['away_team'].queryset = teams
 
-        self.fields['gameweek'].initial = 28
+        self.fields['gameweek'].initial = 29
 
     def clean(self) -> Dict:
         cleaned_data = super().clean()
@@ -53,3 +56,87 @@ class MatchCreationForm(forms.ModelForm):
         match = super().save(*args, **kwargs)
 
         return match
+
+
+class MatchDataCreationForm(forms.Form):
+    kick_off_time = forms.DateTimeField()
+    stadium = forms.ModelChoiceField(queryset=None)
+    attendance = forms.IntegerField()
+    first_half_added_time = forms.IntegerField()
+    second_half_added_time = forms.IntegerField()
+
+    home_coach = forms.ModelChoiceField(queryset=None)
+    home_formation = forms.ModelChoiceField(queryset=None)
+
+    home_first_starting = forms.ModelChoiceField(queryset=None)
+    home_second_starting = forms.ModelChoiceField(queryset=None)
+    home_third_starting = forms.ModelChoiceField(queryset=None)
+    home_fourth_starting = forms.ModelChoiceField(queryset=None)
+    home_fifth_starting = forms.ModelChoiceField(queryset=None)
+    home_sixth_starting = forms.ModelChoiceField(queryset=None)
+    home_seventh_starting = forms.ModelChoiceField(queryset=None)
+    home_eighth_starting = forms.ModelChoiceField(queryset=None)
+    home_ninth_starting = forms.ModelChoiceField(queryset=None)
+    home_tenth_starting = forms.ModelChoiceField(queryset=None)
+    home_eleventh_starting = forms.ModelChoiceField(queryset=None)
+
+    away_coach = forms.ModelChoiceField(queryset=None)
+    away_formation = forms.ModelChoiceField(queryset=None)
+
+    away_first_starting = forms.ModelChoiceField(queryset=None)
+    away_second_starting = forms.ModelChoiceField(queryset=None)
+    away_third_starting = forms.ModelChoiceField(queryset=None)
+    away_fourth_starting = forms.ModelChoiceField(queryset=None)
+    away_fifth_starting = forms.ModelChoiceField(queryset=None)
+    away_sixth_starting = forms.ModelChoiceField(queryset=None)
+    away_seventh_starting = forms.ModelChoiceField(queryset=None)
+    away_eighth_starting = forms.ModelChoiceField(queryset=None)
+    away_ninth_starting = forms.ModelChoiceField(queryset=None)
+    away_tenth_starting = forms.ModelChoiceField(queryset=None)
+    away_eleventh_starting = forms.ModelChoiceField(queryset=None)
+
+    def __init__(self, match: Match, *args: List, **kwargs: Any) -> None:
+        super().__init__(*args, **kwargs)
+        self.match = match
+
+        stadiums = Stadium.objects.all()
+        initial_stadium = match.home_team.stadium
+        self.fields['stadium'].queryset = stadiums
+        self.fields['stadium'].initial = initial_stadium
+
+        home_players = PlayerList.objects.filter(team=match.home_team)
+        away_players = PlayerList.objects.filter(team=match.away_team)
+        home_coaches = CoachList.objects.filter(team=match.home_team)
+        away_coaches = CoachList.objects.filter(team=match.away_team)
+        formations = Formation.objects.all()
+
+        self.fields['home_coach'].queryset = home_coaches
+        self.fields['home_formation'].queryset = formations
+        self.fields['home_first_starting'].queryset = home_players.filter(player__primary_position__type=Position.TYPE.GK)
+        self.fields['home_second_starting'].queryset = home_players
+        self.fields['home_third_starting'].queryset = home_players
+        self.fields['home_fourth_starting'].queryset = home_players
+        self.fields['home_fifth_starting'].queryset = home_players
+        self.fields['home_sixth_starting'].queryset = home_players
+        self.fields['home_seventh_starting'].queryset = home_players
+        self.fields['home_eighth_starting'].queryset = home_players
+        self.fields['home_ninth_starting'].queryset = home_players
+        self.fields['home_tenth_starting'].queryset = home_players
+        self.fields['home_eleventh_starting'].queryset = home_players
+
+        self.fields['away_coach'].queryset = away_coaches
+        self.fields['away_formation'].queryset = formations
+        self.fields['away_first_starting'].queryset = away_players.filter(player__primary_position__type=Position.TYPE.GK)
+        self.fields['away_second_starting'].queryset = away_players
+        self.fields['away_third_starting'].queryset = away_players
+        self.fields['away_fourth_starting'].queryset = away_players
+        self.fields['away_fifth_starting'].queryset = away_players
+        self.fields['away_sixth_starting'].queryset = away_players
+        self.fields['away_seventh_starting'].queryset = away_players
+        self.fields['away_eighth_starting'].queryset = away_players
+        self.fields['away_ninth_starting'].queryset = away_players
+        self.fields['away_tenth_starting'].queryset = away_players
+        self.fields['away_eleventh_starting'].queryset = away_players
+    
+    def save(self, *args: List, **kwargs: Any) -> MatchData:
+        pass

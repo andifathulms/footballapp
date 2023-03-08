@@ -60,9 +60,15 @@ class Referee(models.Model):
     name = models.CharField(max_length=100)
     nationality = models.ForeignKey(Country, related_name='referees', on_delete=models.CASCADE)
 
+    def __str__(self):
+        return self.name
+
 
 class Formation(models.Model):
     name = models.CharField(max_length=10)
+
+    def __str__(self):
+        return self.name
 
 
 class LineUp(models.Model):
@@ -102,7 +108,7 @@ class Goals(models.Model):
         (2, 'second_half', 'Second Half'),
         (3, 'first_half_et', 'Extra Time First Half'),
         (4, 'second_half_et', 'Extra Time Second Half'),
-        (5, 'penaltiy_shootout', 'Penalty Shoot-Out')
+        (5, 'penalty_shootout', 'Penalty Shoot-Out')
     )
     half = models.PositiveSmallIntegerField(choices=HALF)
 
