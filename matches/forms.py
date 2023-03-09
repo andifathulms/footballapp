@@ -80,6 +80,18 @@ class MatchDataCreationForm(forms.Form):
     home_tenth_starting = forms.ModelChoiceField(queryset=None)
     home_eleventh_starting = forms.ModelChoiceField(queryset=None)
 
+    home_first_starting_position = forms.ModelChoiceField(queryset=None)
+    home_second_starting_position = forms.ModelChoiceField(queryset=None)
+    home_third_starting_position = forms.ModelChoiceField(queryset=None)
+    home_fourth_starting_position = forms.ModelChoiceField(queryset=None)
+    home_fifth_starting_position = forms.ModelChoiceField(queryset=None)
+    home_sixth_starting_position = forms.ModelChoiceField(queryset=None)
+    home_seventh_starting_position = forms.ModelChoiceField(queryset=None)
+    home_eighth_starting_position = forms.ModelChoiceField(queryset=None)
+    home_ninth_starting_position = forms.ModelChoiceField(queryset=None)
+    home_tenth_starting_position = forms.ModelChoiceField(queryset=None)
+    home_eleventh_starting_position = forms.ModelChoiceField(queryset=None)
+
     away_coach = forms.ModelChoiceField(queryset=None)
     away_formation = forms.ModelChoiceField(queryset=None)
 
@@ -95,6 +107,18 @@ class MatchDataCreationForm(forms.Form):
     away_tenth_starting = forms.ModelChoiceField(queryset=None)
     away_eleventh_starting = forms.ModelChoiceField(queryset=None)
 
+    away_first_starting_position = forms.ModelChoiceField(queryset=None)
+    away_second_starting_position = forms.ModelChoiceField(queryset=None)
+    away_third_starting_position = forms.ModelChoiceField(queryset=None)
+    away_fourth_starting_position = forms.ModelChoiceField(queryset=None)
+    away_fifth_starting_position = forms.ModelChoiceField(queryset=None)
+    away_sixth_starting_position = forms.ModelChoiceField(queryset=None)
+    away_seventh_starting_position = forms.ModelChoiceField(queryset=None)
+    away_eighth_starting_position = forms.ModelChoiceField(queryset=None)
+    away_ninth_starting_position = forms.ModelChoiceField(queryset=None)
+    away_tenth_starting_position = forms.ModelChoiceField(queryset=None)
+    away_eleventh_starting_position = forms.ModelChoiceField(queryset=None)
+
     def __init__(self, match: Match, *args: List, **kwargs: Any) -> None:
         super().__init__(*args, **kwargs)
         self.match = match
@@ -109,6 +133,7 @@ class MatchDataCreationForm(forms.Form):
         home_coaches = CoachList.objects.filter(team=match.home_team)
         away_coaches = CoachList.objects.filter(team=match.away_team)
         formations = Formation.objects.all()
+        positions = Position.objects.all()
 
         self.fields['home_coach'].queryset = home_coaches
         self.fields['home_formation'].queryset = formations
@@ -124,6 +149,18 @@ class MatchDataCreationForm(forms.Form):
         self.fields['home_tenth_starting'].queryset = home_players
         self.fields['home_eleventh_starting'].queryset = home_players
 
+        self.fields['home_first_starting_position'].queryset = positions
+        self.fields['home_second_starting_position'].queryset = positions
+        self.fields['home_third_starting_position'].queryset = positions
+        self.fields['home_fourth_starting_position'].queryset = positions
+        self.fields['home_fifth_starting_position'].queryset = positions
+        self.fields['home_sixth_starting_position'].queryset = positions
+        self.fields['home_seventh_starting_position'].queryset = positions
+        self.fields['home_eighth_starting_position'].queryset = positions
+        self.fields['home_ninth_starting_position'].queryset = positions
+        self.fields['home_tenth_starting_position'].queryset = positions
+        self.fields['home_eleventh_starting_position'].queryset = positions
+
         self.fields['away_coach'].queryset = away_coaches
         self.fields['away_formation'].queryset = formations
         self.fields['away_first_starting'].queryset = away_players.filter(player__primary_position__type=Position.TYPE.GK)
@@ -137,6 +174,18 @@ class MatchDataCreationForm(forms.Form):
         self.fields['away_ninth_starting'].queryset = away_players
         self.fields['away_tenth_starting'].queryset = away_players
         self.fields['away_eleventh_starting'].queryset = away_players
+
+        self.fields['away_first_starting_position'].queryset = positions
+        self.fields['away_second_starting_position'].queryset = positions
+        self.fields['away_third_starting_position'].queryset = positions
+        self.fields['away_fourth_starting_position'].queryset = positions
+        self.fields['away_fifth_starting_position'].queryset = positions
+        self.fields['away_sixth_starting_position'].queryset = positions
+        self.fields['away_seventh_starting_position'].queryset = positions
+        self.fields['away_eighth_starting_position'].queryset = positions
+        self.fields['away_ninth_starting_position'].queryset = positions
+        self.fields['away_tenth_starting_position'].queryset = positions
+        self.fields['away_eleventh_starting_position'].queryset = positions
     
     def save(self, *args: List, **kwargs: Any) -> MatchData:
         pass

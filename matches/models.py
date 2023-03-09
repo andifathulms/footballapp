@@ -218,7 +218,7 @@ class MatchCards(models.Model):
     
 class PlayerRole(models.Model):
     player = models.ForeignKey(Player, on_delete=models.CASCADE)
-    lineup = models.ForeignKey('Lineup', on_delete=models.CASCADE)
+    lineup = models.ForeignKey('Lineup', on_delete=models.CASCADE, blank=True, null=True)
     position = models.ForeignKey(Position, on_delete=models.CASCADE)
     is_captain = models.BooleanField(default=False)
 
